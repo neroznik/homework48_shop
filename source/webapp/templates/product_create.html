@@ -7,8 +7,8 @@
 
 {% block content %}
     <div class = 'block1'>
-    <h1>Add your task </h1>
-    {% url "entry_create" as action_url %}
+    <h1>Add your product: </h1>
+    {% url "product_create" as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' %}
     </div>
 {% endblock %}

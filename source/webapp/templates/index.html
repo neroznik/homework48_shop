@@ -1,30 +1,28 @@
 
 {% extends 'base.html' %}
 
-{% block title %}Guest Book{% endblock %}
+{% block title %}Products {% endblock %}
 
 {% block content %}
-
-    {% for ent in Entry %}
+    {% for product in Products %}
         <div class="card text-secondary border-primary "style="width: 35rem;">
           <div class="card-header">
             <div class="row">
               <div class="col-md-7">
-                <p class ="author"> <b>{{ ent.author }}</b></p>
-                <p> ({{ ent.mail }} )</p>
-                  <p class = "created"><i>Created:{{ ent.created_at }}</i> </p>
-                  <p class = "created"><i>Updated{{ ent.updated_at }}</i> </p>
+                <p class ="author"> <b>{{ product.name }}</b></p>
+                <p> ({{ product.category }} )</p>
+                  <p class = "created"><b>Amount:</b> {{ product.amount }} <b>with price: </b> {{ product.price }} </p>
               </div>
               <div class="col-md-5">
                 <div class="float-right">
-                    <a class="btn btn-outline-success" href="{% url 'entry_update' ent.pk %}"> <i class="fa fa-fw fa-edit"></i></a>
-                    <a class="btn btn-outline-danger" href="{% url 'entry_delete' ent.pk %}"> <i class="fa fa-fw fa-trash"></i> </a>
+                    <a class="btn btn-outline-success" href="{% url 'product_create' product.pk %}"> <i class="fa fa-fw fa-edit"></i></a>
+                    <a class="btn btn-outline-danger" href="{% url 'product_delete' product.pk %}"> <i class="fa fa-fw fa-trash"></i> </a>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-body">
-            <p class="card-text"><p>{{ ent.text }}</p></p>
+            <p class="card-text"><p>{{ product.description }}</p></p>
           </div>
         </div>
     {% endfor %}

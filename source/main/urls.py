@@ -19,7 +19,7 @@ from webapp.views import index_view,product_view, product_create_view, product_d
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_view(), name='index'),
+    path('', index_view, name='index'),
     path('product/<int:pk>/', product_view, name='product_view'),
     path('product/add/', product_create_view, name='product_create'),
     path('product/<int:pk>/update/', product_update_view, name='product_update'),

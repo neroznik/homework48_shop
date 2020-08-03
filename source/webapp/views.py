@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
 
-from source.webapp.forms import ProductForm
-from source.webapp.models import Product
+from webapp.forms import ProductForm
+from webapp.models import Product
 
 
 def index_view(request):
@@ -10,10 +10,9 @@ def index_view(request):
     if is_admin:
         data = Product.objects.all()
     else:
-        data = Product.objects.filter(status='active')
+        data = Product.objects.all()
     return render(request, 'index.html', context={
-        'Product': data
-    })
+        'Products': data})
 
 def product_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
