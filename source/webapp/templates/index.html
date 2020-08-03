@@ -4,25 +4,25 @@
 {% block title %}Products {% endblock %}
 
 {% block content %}
-    {% for product in Products %}
+    {% for Product in Products %}
         <div class="card text-secondary border-primary "style="width: 35rem;">
           <div class="card-header">
             <div class="row">
               <div class="col-md-7">
-                <p class ="author"> <b>{{ product.name }}</b></p>
-                <p> ({{ product.category }} )</p>
-                  <p class = "created"><b>Amount:</b> {{ product.amount }} <b>with price: </b> {{ product.price }} </p>
+                <p class ="author"> <b>{{ Product.name }}</b></p>
+                <p> ({{ Product.category }} )</p>
+                  <p class = "created"><b>Amount:</b> {{ Product.amount }} <b>with price: </b> {{ Product.price }} </p>
               </div>
               <div class="col-md-5">
                 <div class="float-right">
-                    <a class="btn btn-outline-success" href="{% url 'product_create' product.pk %}"> <i class="fa fa-fw fa-edit"></i></a>
-                    <a class="btn btn-outline-danger" href="{% url 'product_delete' product.pk %}"> <i class="fa fa-fw fa-trash"></i> </a>
+                    <a class="btn btn-outline-success" href="{% url 'product_update' Product.pk%}"> <i class="fa fa-fw fa-edit"></i></a>
+                    <a class="btn btn-outline-danger" href="{% url 'product_delete' Product.pk%}"> <i class="fa fa-fw fa-trash"></i> </a>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-body">
-            <p class="card-text"><p>{{ product.description }}</p></p>
+            <p class="card-text"><p>{{ Product.description }}</p></p>
           </div>
         </div>
     {% endfor %}

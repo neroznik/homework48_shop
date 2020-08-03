@@ -1,0 +1,18 @@
+ 
+{% extends 'base.html' %}
+
+{% block title %}Task{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'product_update' Tasks.pk %}">Update</a></li>
+    <li><a href="{% url 'product_delete' Tasks.pk %}">Delete</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="block1">
+    <h1>{{ Products.name }}</h1>
+    <p>Description: {{ Products.description }}</p>
+    <p>Статус: {{ Products.category }}</p>
+    <p>Amount: {{ Products.amount}} with price: {{ Product.price}}</p>
+    </div>
+{% endblock %}

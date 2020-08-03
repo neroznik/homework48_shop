@@ -1,0 +1,24 @@
+[
+{
+  "model": "webapp.product",
+  "pk": 1,
+  "fields": {
+    "name": "rice",
+    "description": "Testy rice",
+    "category": "food",
+    "amount": 500,
+    "price": "70.00"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 2,
+  "fields": {
+    "name": "car",
+    "description": "small and blue",
+    "category": "toys",
+    "amount": 25,
+    "price": "170.00"
+  }
+}
+]
