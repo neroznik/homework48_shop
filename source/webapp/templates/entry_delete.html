@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Delete{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block content %}
+    <h1>Do you like to delete entry from: "<b>{{Entry.author}}</b>"?</h1>
+    <br>
+      <form action="{%url "entry_delete" Entry.pk%}" method="post">
+        {% csrf_token %}
+           <input type="submit" class="btn btn-danger" value="Yes">
+          <a type="button" class="btn btn-primary" href="{% url 'index' %}">Cancel</a>
+      <br>
+    </form>
+    <br>
+    <h4 > Entry text: </h4>
+    <h6><i>{{ Entry.text }}</i></h6>
+{% endblock %}
+
