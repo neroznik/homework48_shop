@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from django.db import models
 
 DEFAULT_CATEGORY = 'other'
 CATEGORY_CHOICES = (
