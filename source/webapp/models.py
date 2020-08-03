@@ -11,7 +11,7 @@ CATEGORY_CHOICES = (
 )
 
 
-class Prod(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название')
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
     category = models.CharField(max_length=20, verbose_name='Категория',
