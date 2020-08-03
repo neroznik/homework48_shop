@@ -1,8 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from django.db import models
-
 DEFAULT_CATEGORY = 'other'
 CATEGORY_CHOICES = (
     (DEFAULT_CATEGORY, 'Разное'),
@@ -13,7 +11,7 @@ CATEGORY_CHOICES = (
 )
 
 
-class Product(models.Model):
+class Prod(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название')
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
     category = models.CharField(max_length=20, verbose_name='Категория',
