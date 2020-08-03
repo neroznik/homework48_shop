@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotAllowed
-from django.utils.timezone import make_naive
 
+from source.webapp.forms import ProductForm
+from source.webapp.models import Product
 
 
 def index_view(request):
@@ -9,69 +10,71 @@ def index_view(request):
     if is_admin:
         data = Product.objects.all()
     else:
-        data = Entry.objects.filter(status='active')
+        data = Product.objects.filter(status='active')
     return render(request, 'index.html', context={
-        'Entry': data
+        'Product': data
     })
 
-def entry_create_view(request):
+def product_create_view(request):
     if request.method == "GET":
-        return render(request, 'entry_create.html', context={
-            'form': EntryForm()
+        return render(request, 'product_create.html', context={
+            'form': ProductForm()
         })
     elif request.method == 'POST':
-        form = EntryForm(data=request.POST)
+        form = ProductForm(data=request.POST)
         if form.is_valid():
-            entry = Entry.objects.create(
-                author=form.cleaned_data['author'],
-                mail=form.cleaned_data['mail'],
-                text=form.cleaned_data['text'],
-                status=form.cleaned_data['status'])
+            product = Product.objects.create(
+                name=form.cleaned_data['name'],
+                description = form.cleaned_data['description'],
+                category = form.cleaned_data['cathegory'],
+                amount = form.cleaned_data['amount'],
+                price = form.cleaned_data['price'] )
             return redirect('index')
         else:
-            return render(request, 'entry_create.html', context={
+            return render(request, 'product_create.html', context={
                 'form': form
             })
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
-def entry_update_view(request, pk):
-    entry = get_object_or_404(Entry, pk=pk)
+def price_update_view(request, pk):
+    product = get_object_or_404(Product, pk=pk)
     if request.method == "GET":
-        form = EntryForm(initial={
-            'text': entry.text,
-            'mail': entry.mail,
-            'author': entry.author,
-            'status': entry.status,
-            'updated_at': make_naive(entry.updated_at).strftime(BROWSER_DATETIME_FORMAT)
-             })
-        return render(request, 'entry_update.html', context={
+        form = ProductForm(initial={
+            'name': product.name,
+            'description': product.description,
+            'category': product.category,
+            'amount': product.amount,
+            'price': product.price
+        })
+        return render(request, 'product_update.html', context={
             'form': form,
-            'Entry': entry
+            'Products': product
         })
     elif request.method == 'POST':
-        form = EntryForm(data=request.POST)
+        form = ProductForm(data=request.POST)
         if form.is_valid():
-            entry.author = form.cleaned_data['author']
-            entry.mail = form.cleaned_data['mail']
-            entry.text = form.cleaned_data['text']
-            entry.status = form.cleaned_data['status']
-            entry.save()
+            product.name = form.cleaned_data['name']
+            product.description = form.cleaned_data['description']
+            product.category = form.cleaned_data['category']
+            product.amount = form.cleaned_data['amount']
+            product.price = form.cleaned_data['price']
+            product.save()
             return redirect('index')
         else:
-            return render(request, 'entry_update.html', context={
-                'Entry': entry,
+            return render(request, 'product_update.html', context={
+                'Products': product,
                 'form': form
             })
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
-def entry_delete_view(request, pk):
-    entry = get_object_or_404(Entry, pk=pk)
+def product_delete_view(request, pk):
+    product = get_object_or_404(Product, pk=pk)
     if request.method == 'GET':
-        return render(request, 'entry_delete.html', context={'Entry': entry})
+        return render(request, 'product_delete.html', context={'Products': product})
     elif request.method == 'POST':
-        entry.delete()
+        product.delete()
         return redirect('index')
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
